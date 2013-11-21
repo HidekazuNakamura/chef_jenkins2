@@ -44,7 +44,7 @@ end
 execute "channel-discover components.ez.no" do
   not_if{File.exists?("/usr/share/pear/.channels/components.ez.no.reg")}
   action :run
-  command 'pear channel-discover pear.components.ez.no'
+  command 'pear channel-discover components.ez.no'
 end
 
 execute "channel-discover pear.symfony-project.com" do
