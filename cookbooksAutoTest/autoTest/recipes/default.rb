@@ -102,6 +102,8 @@ execute "get jenkins_plugin" do
   command "sudo wget -O #{Chef::Config[:jenkins_path]}/jenkins-cli.jar http://localhost:8080/jnlpJars/jenkins-cli.jar"
 end
 
+sleep 5
+
 execute "jenkins_plugin" do
   action :run
 command "sudo java -jar #{Chef::Config[:jenkins_path]}/jenkins-cli.jar -s http://localhost:8080 install-plugin phing"
@@ -174,8 +176,7 @@ remote_file "#{Chef::Config[:jenkins_opt_path]}/php-webdriver-bindings-0.9.0.zip
 end
 
 execute "php-webdriver-bindings" do
-  not_if{File.exists?("#{Chef::Config[:jenkins_opt_path]}/php-webdriver-bindings-0.9.0/phpwebdriver/WebDriver.php")}
-
+  not_if{File.exists?("#{Chef::Config[:jenkins_opt_path]}/php-webdriver-bindings-0.9.0.zip")}
   command "unzip #{Chef::Config[:jenkins_opt_path]}/php-webdriver-bindings-0.9.0.zip"
   action :run
 end
